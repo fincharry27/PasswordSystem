@@ -3,24 +3,30 @@
 
 
 
-input()
+inputUsername()
 {
 	string userName;
-	string userPassword;
+	
 
 	cout << "Please enter your username. " << endl;
 	 cin >> userName;
 
+	//cout << userName ;
+	
+	return userName;
+}
+
+inputPassword()
+{
+	string userPassword;
 	cout << "Please enter the password. " << endl;
 	cin >> userPassword;
 
-	
-	//cout << userName << endl <<  userPassword  ; //just to see if it works
+	//cout << userPassword ;
 
-	//code to call hashPassword function
-
-	//return userName + HashedPassword;
+	return userPassword;
 }
+
 
 int main() {
   bool auth = true;
