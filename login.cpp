@@ -3,7 +3,7 @@
 
 
 
-getInput()
+input()
 {
 	string userName;
 	string userPassword;
