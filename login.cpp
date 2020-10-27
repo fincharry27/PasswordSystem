@@ -3,7 +3,19 @@
 
 
 
-inputUsername()
+
+
+
+int main() {
+  bool auth = true;
+ 
+  if (auth) authenticated("user");
+  else rejected("user");
+}
+
+
+//recieves username
+string inputUsername()
 {
 	string userName;
 	
@@ -16,7 +28,9 @@ inputUsername()
 	return userName;
 }
 
-inputPassword()
+
+//recieves password to be hashed
+string inputPassword()
 {
 	string userPassword;
 	cout << "Please enter the password. " << endl;
@@ -25,12 +39,4 @@ inputPassword()
 	//cout << userPassword ;
 
 	return userPassword;
-}
-
-
-int main() {
-  bool auth = true;
- 
-  if (auth) authenticated("user");
-  else rejected("user");
 }
