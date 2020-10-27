@@ -6,15 +6,36 @@
 
 using namespace std;
 
-int main() 
+
+
+
+getInput()
 {
- // bool auth = true;
- 
+	string userName;
+	string userPassword;
+
+	cout << "Please enter your username. " << endl;
+	 cin >> userName;
+
+	cout << "Please enter the password. " << endl;
+	cin >> userPassword;
+
+	
+	//cout << userName << endl <<  userPassword  ; //just to see if it works
+
+	//code to call hashPassword function
+
+	//return userName + HashedPassword;
+}
+
+int main() {
+  //bool auth = true;
  // if (auth) authenticated("user");
  // else rejected("user");
 	cout << hashFunction("password") <<endl;
 	return 0;
 }
+
 
 
 // This function was created with reference to this stack overflow page https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c
@@ -34,4 +55,27 @@ string hashFunction(string password)
 		outPass += ss.str();
 	}
 	return outPass;
+
+bool compare(string username, string hashedPassword, string savedUsername, string savedPassword)
+{
+	bool authenticate = false;
+
+	if (username == savedUsername)
+	{
+		if (hashedPassword == savedPassword)
+		{
+			authenticate = true;
+		}
+		else
+		{
+			std::cout << "Incorrect password" << std::endl;
+			return authenticate;
+		} 	
+	}
+	else
+	{
+		std::cout << "Incorrect username" << std::endl;
+		return authenticate;
+	} 	
+
 }
