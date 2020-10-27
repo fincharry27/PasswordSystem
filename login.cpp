@@ -2,12 +2,11 @@
 #include <sstream>
 #include "authlib.h"
 #include "login.h"
-#include <openssl/sha.h>
+
 
 using namespace std;
 
-
-
+#include <openssl/sha.h>
 
 getInput()
 {
@@ -36,8 +35,6 @@ int main() {
 	return 0;
 }
 
-
-
 // This function was created with reference to this stack overflow page https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c
 string hashFunction(string password)
 {
@@ -55,6 +52,7 @@ string hashFunction(string password)
 		outPass += ss.str();
 	}
 	return outPass;
+}
 
 bool compare(string username, string hashedPassword, string savedUsername, string savedPassword)
 {
