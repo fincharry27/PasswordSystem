@@ -32,6 +32,30 @@ int main() {
   else rejected("user");
 }
 
-string hashfunction(string password){
-	
+string hashfunction(string password)
+{
+
+}
+
+bool compare(string username, string hashedPassword, string savedUsername, string savedPassword)
+{
+	bool authenticate = false;
+
+	if (username == savedUsername)
+	{
+		if (hashedPassword == savedPassword)
+		{
+			authenticate = true;
+		}
+		else
+		{
+			std::cout << "Incorrect password" << std::endl;
+			return authenticate;
+		} 	
+	}
+	else
+	{
+		std::cout << "Incorrect username" << std::endl;
+		return authenticate;
+	} 	
 }
