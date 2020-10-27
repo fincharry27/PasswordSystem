@@ -8,7 +8,8 @@ using namespace std;
 
 #include <openssl/sha.h>
 
-inputUsername()
+//recieves username
+string inputUsername()
 {
 	string userName;
 	
@@ -21,7 +22,8 @@ inputUsername()
 	return userName;
 }
 
-inputPassword()
+//recieves password to be hashed
+string inputPassword()
 {
 	string userPassword;
 	cout << "Please enter the password. " << endl;
@@ -31,7 +33,6 @@ inputPassword()
 
 	return userPassword;
 }
-
 
 int main() {
   //bool auth = true;
@@ -83,3 +84,4 @@ bool compare(string username, string hashedPassword, string savedUsername, strin
 	} 	
 
 }
+
