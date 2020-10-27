@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 
-String input();
+std::string input();
 
-bool compare(String username, String hashedPassword);
+bool compare(std::string username, std::string hashedPassword);
 
-String hashFunction(String password);
+std::string hashFunction(std::string password);
