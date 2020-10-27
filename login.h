@@ -5,6 +5,7 @@ std::string inputUsername();
 
 std::string inputPassword();
 
-bool compare(std::string username, std::string hashedPassword, std::string savedUsername, std::string savedPassword);
+int compare(std::string username, std::string hashedPassword, std::string savedUsername_li[], std::string savedPassword_li[]);
 
 std::string hashFunction(std::string password);
+

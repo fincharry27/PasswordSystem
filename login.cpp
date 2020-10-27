@@ -8,6 +8,8 @@ using namespace std;
 
 #include <openssl/sha.h>
 
+int SUCCESS = 0;
+int FAILURE = 5;
 //recieves username
 string inputUsername()
 {
@@ -22,23 +24,26 @@ string inputUsername()
 	return userName;
 }
 
-//recieves password to be hashed
+//recieves password and then hashes it
 string inputPassword()
 {
 	string userPassword;
+	string hashedPassword;
 	cout << "Please enter the password. " << endl;
 	cin >> userPassword;
 
-	//cout << userPassword ;
-
-	return userPassword;
+	//hashing the password immediatley 
+	hashedPassword = hashFunction(userPassword);
+	return hashedPassword;
 }
 
 int main() {
-  //bool auth = true;
- // if (auth) authenticated("user");
- // else rejected("user");
-	cout << hashFunction("password") <<endl;
+	string username;
+	string hashPass;
+	username = inputUsername();
+	hashPass = inputPassword();
+	//load information from file
+	//run comparison
 	return 0;
 }
 
@@ -61,27 +66,36 @@ string hashFunction(string password)
 	return outPass;
 }
 
-bool compare(string username, string hashedPassword, string savedUsername, string savedPassword)
+//change return values so that it runs the 2 functions given in the brief
+int compare(string username, string hashedPassword, string savedUsername_li[], string savedPassword_li[])
 {
 	bool authenticate = false;
+	int counter = 0;
+	int liSize = *(&savedUsername_li+1) - savedUsername_li;
 
-	if (username == savedUsername)
+	while (counter < liSize && authenticate == false)
 	{
-		if (hashedPassword == savedPassword)
+		if (username == savedUsername_li[counter])
 		{
-			authenticate = true;
+			if (hashedPassword == savedPassword_li[counter])
+			{
+				authenticate = true;
+			}
+			else
+			{
+				std::cout << "Incorrect passwor8d" << std::endl;
+				//rejected(username);
+				return FAILURE;
+			} 	
 		}
 		else
 		{
-			std::cout << "Incorrect password" << std::endl;
-			return authenticate;
+			std::cout << "Incorrect username" << std::endl;
+			//rejected(username);
+			return FAILURE;
 		} 	
 	}
-	else
-	{
-		std::cout << "Incorrect username" << std::endl;
-		return authenticate;
-	} 	
-
+	//authenticated(username);
+	return SUCCESS;
 }
 
