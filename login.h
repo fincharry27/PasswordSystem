@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
 
-std::string input();
+std::string inputUsername();
+
+std::string inputPassword();
 
 bool compare(std::string username, std::string hashedPassword, std::string savedUsername, std::string savedPassword);
 
