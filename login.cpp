@@ -11,6 +11,7 @@ using namespace std;
 
 int SUCCESS = 0;
 int FAILURE = 5;
+string fileName = "3791570.txt";
 //recieves username
 string inputUsername()
 {
@@ -39,12 +40,13 @@ string inputPassword()
 }
 
 int main() {
-	string username;
-	string hashPass;
-	username = inputUsername();
-	hashPass = inputPassword();
+	//string username;
+	//string hashPass;
+	//username = inputUsername();
+	//hashPass = inputPassword();
 	//load information from file
 	//run comparison
+	readFile();
 	return 0;
 }
 
@@ -84,7 +86,7 @@ int compare(string username, string hashedPassword, string savedUsername_li[], s
 			}
 			else
 			{
-				std::cout << "Incorrect passwor8d" << std::endl;
+				std::cout << "Incorrect password" << std::endl;
 				//rejected(username);
 				return FAILURE;
 			} 	
@@ -100,10 +102,7 @@ int compare(string username, string hashedPassword, string savedUsername_li[], s
 	return SUCCESS;
 }
 
-//Move to header
-int readFile();
-string fileName = "3791570.txt";
-
+//this doesn't detect passwords at all, the array 'passwords' is filled with usernames
 int readFile(){
     string line;
     //Seeing how large arrays need to be
@@ -130,9 +129,10 @@ int readFile(){
 
         }
         names[i] = unformattedList[0];
-        passwords[i] = unformattedList[0];
+        passwords[i] = unformattedList[1];
         i++;
     }
-    cout << names[1] << endl;
+    //this will produce 'alicealice' or 'rootroot'
+    cout << names[1] << passwords[1] << endl;
     return 1;
 }
