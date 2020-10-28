@@ -1,8 +1,9 @@
 #include <iostream>
 #include <sstream>
+#include <fstream>
+#include <vector>
 #include "authlib.h"
 #include "login.h"
-
 
 using namespace std;
 
@@ -99,3 +100,39 @@ int compare(string username, string hashedPassword, string savedUsername_li[], s
 	return SUCCESS;
 }
 
+//Move to header
+int readFile();
+string fileName = "3791570.txt";
+
+int readFile(){
+    string line;
+    //Seeing how large arrays need to be
+    int count = 0;
+    ifstream fileCount(fileName);
+    while (getline(fileCount, line)){
+        count++;
+    }
+    string unFormatted[count];
+    string names[count];
+    string passwords[count];
+    //Reading in each line of the file
+    int i= 0;
+    ifstream fileRead(fileName);
+    while (getline(fileRead, line)){
+        unFormatted[i] = line;
+        //Splitting each line of the file into separate arrays for password and username
+        stringstream unFormattedStringOpen(unFormatted[i]);
+        string components;
+        vector<string> unformattedList;
+        while(getline(unFormattedStringOpen, components, ':'))
+        {
+            unformattedList.push_back(components);
+
+        }
+        names[i] = unformattedList[0];
+        passwords[i] = unformattedList[0];
+        i++;
+    }
+    cout << names[1] << endl;
+    return 1;
+}
