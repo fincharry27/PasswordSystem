@@ -129,7 +129,7 @@ int readFile(){
 
         }
         names[i] = unformattedList[0];
-        passwords[i] = unformattedList[0];
+        passwords[i] = unformattedList[1];
         i++;
     }
     //this will produce 'alicealice' or 'rootroot'
