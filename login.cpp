@@ -134,6 +134,7 @@ int readFile(string username, string hashedPassword){
 
     bool authenticate = false;
 	int counter = 0;
+
 	int liSize = *(&names+1) - names;
 
 	while (counter < liSize && authenticate == false)
@@ -150,15 +151,16 @@ int readFile(string username, string hashedPassword){
 			{
 				std::cout << "Incorrect password" << std::endl;
 				//rejected(username);
-				return FAILURE;
+				//return FAILURE;
 			} 	
 		}
 		else
 		{
 			std::cout << "Incorrect username" << std::endl;
 			//rejected(username);
-			return FAILURE;
-		} 	
+			//return FAILURE;
+		}
+		counter++;
 	}
 
 	return SUCCESS;
