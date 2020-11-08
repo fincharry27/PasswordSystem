@@ -69,39 +69,6 @@ string hashFunction(string password)
 	return outPass;
 }
 
-//change return values so that it runs the 2 functions given in the brief
-// int compare(string username, string hashedPassword, string savedUsername_li[], string savedPassword_li[])
-// {
-// 	bool authenticate = false;
-// 	int counter = 0;
-// 	int liSize = *(&savedUsername_li+1) - savedUsername_li;
-
-// 	while (counter < liSize && authenticate == false)
-// 	{
-// 		if (username == savedUsername_li[counter])
-// 		{
-// 			if (hashedPassword == savedPassword_li[counter])
-// 			{
-// 				authenticate = true;
-// 			}
-// 			else
-// 			{
-// 				std::cout << "Incorrect password" << std::endl;
-// 				//rejected(username);
-// 				return FAILURE;
-// 			} 	
-// 		}
-// 		else
-// 		{
-// 			std::cout << "Incorrect username" << std::endl;
-// 			//rejected(username);
-// 			return FAILURE;
-// 		} 	
-// 	}
-// 	//authenticated(username);
-// 	return SUCCESS;
-// }
-
 int readFile(string username, string hashedPassword){
     string line;
     //Seeing how large arrays need to be
