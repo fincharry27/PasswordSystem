@@ -9,4 +9,4 @@ int compare(std::string username, std::string hashedPassword, std::string savedU
 
 std::string hashFunction(std::string password);
 
-int readFile();
+int readFile(std::string username, std::string hashedPassword);
