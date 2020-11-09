@@ -12,18 +12,17 @@ using namespace std;
 int SUCCESS = 0;
 int FAILURE = 5;
 string fileName = "3791570.txt";
+
 //recieves username
 string inputUsername()
 {
 	string userName;
 	
 
-	cout << "Please enter your username. " << endl;
-	 cin >> userName;
+	cout << "Please enter your username. " << endl; //get username input
+	 cin >> userName; // assign to variable
 
-	//cout << userName ;
-	
-	return userName;
+	return userName; //returns username
 }
 
 //recieves password and then hashes it
@@ -31,12 +30,13 @@ string inputPassword()
 {
 	string userPassword;
 	string hashedPassword;
-	cout << "Please enter the password. " << endl;
-	cin >> userPassword;
+	cout << "Please enter the password. " << endl; //recieves password input
+	cin >> userPassword; // assign to variable
 
 	//hashing the password immediatley 
 	hashedPassword = hashFunction(userPassword);
-	return hashedPassword;
+
+	return hashedPassword; // returns hashed password
 }
 
 int main() {
