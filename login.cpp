@@ -42,7 +42,6 @@ int main() {
 	bool logInSuccess;
 	username = inputUsername();
 	hashPass = inputPassword();
-	std::cout << hashPass << std::endl;
 	logInSuccess = checkLogInFile(username,hashPass);
 	if(logInSuccess == true)
 	{
