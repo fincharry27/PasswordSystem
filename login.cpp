@@ -19,7 +19,7 @@ string inputUsername()
 	
 
 	cout << "Please enter your username. " << endl;
-	 cin >> userName;
+	cin >> userName;
 
 	//cout << userName ;
 	
@@ -36,17 +36,26 @@ string inputPassword()
 
 	//hashing the password immediatley 
 	hashedPassword = hashFunction(userPassword);
+	cout << "Hashed password: " << hashedPassword << endl;
 	return hashedPassword;
 }
 
 int main() {
-	//string username;
-	//string hashPass;
-	//username = inputUsername();
-	//hashPass = inputPassword();
-	//load information from file
-	//run comparison
-	readFile("alice","poop");
+	string username;
+	string hashPass;
+	bool logInSuccess;
+	username = inputUsername();
+	hashPass = inputPassword();
+	logInSuccess = checkLogInFile(username,hashPass);
+	if(logInSuccess == true)
+	{
+		authenticated(username);
+	}
+	else
+	{
+		rejected(username);
+	}
+
 	return 0;
 }
 
@@ -69,40 +78,7 @@ string hashFunction(string password)
 	return outPass;
 }
 
-//change return values so that it runs the 2 functions given in the brief
-// int compare(string username, string hashedPassword, string savedUsername_li[], string savedPassword_li[])
-// {
-// 	bool authenticate = false;
-// 	int counter = 0;
-// 	int liSize = *(&savedUsername_li+1) - savedUsername_li;
-
-// 	while (counter < liSize && authenticate == false)
-// 	{
-// 		if (username == savedUsername_li[counter])
-// 		{
-// 			if (hashedPassword == savedPassword_li[counter])
-// 			{
-// 				authenticate = true;
-// 			}
-// 			else
-// 			{
-// 				std::cout << "Incorrect password" << std::endl;
-// 				//rejected(username);
-// 				return FAILURE;
-// 			} 	
-// 		}
-// 		else
-// 		{
-// 			std::cout << "Incorrect username" << std::endl;
-// 			//rejected(username);
-// 			return FAILURE;
-// 		} 	
-// 	}
-// 	//authenticated(username);
-// 	return SUCCESS;
-// }
-
-int readFile(string username, string hashedPassword){
+bool checkLogInFile(string username, string hashedPassword){
     string line;
     //Seeing how large arrays need to be
     int count = 0;
@@ -139,29 +115,29 @@ int readFile(string username, string hashedPassword){
 
 	while (counter < liSize && authenticate == false)
 	{
+		std::cout << "names[counter]: " << names[counter] << std::endl;
+		std::cout << "passwords[counter]: " << passwords[counter] << std::endl;
 		if (username == names[counter])
 		{
-			std::cout << "Username = list username" << std::endl;
 			if (hashedPassword == passwords[counter])
 			{
-				std::cout << "password = list password" << std::endl;
 				authenticate = true;
+				std::cout << "Log In successfull" << std::endl;
+				//authenticated(username);
 			}
 			else
 			{
 				std::cout << "Incorrect password" << std::endl;
 				//rejected(username);
-				//return FAILURE;
 			} 	
 		}
 		else
 		{
 			std::cout << "Incorrect username" << std::endl;
 			//rejected(username);
-			//return FAILURE;
 		}
 		counter++;
 	}
 
-	return SUCCESS;
+	return authenticate;
 }
