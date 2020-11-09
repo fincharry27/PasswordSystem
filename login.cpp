@@ -46,6 +46,7 @@ int main() {
 	bool logInSuccess;
 	username = inputUsername();
 	hashPass = inputPassword();
+	std::cout << hashPass << std::endl;
 	logInSuccess = checkLogInFile(username,hashPass);
 	if(logInSuccess == true)
 	{
@@ -78,6 +79,8 @@ string hashFunction(string password)
 	return outPass;
 }
 
+//Takes in a username and a hashed password and compares them to the usernames and passwords on file
+//Returns boolean variable based on log in success
 bool checkLogInFile(string username, string hashedPassword){
     string line;
     //Seeing how large arrays need to be
@@ -107,18 +110,21 @@ bool checkLogInFile(string username, string hashedPassword){
         passwords[i] = unformattedList[1];
         i++;
     }
-
+    //after the file has been read and the string split into two lists we begin
+    //with comparing the user entered data to the data stored on file
     bool authenticate = false;
 	int counter = 0;
 
+	//find the size of the list (not hard coded to allow easy expansion)
 	int liSize = *(&names+1) - names;
 
+	//while there are still items in the lists and we are not already logged in
 	while (counter < liSize && authenticate == false)
 	{
-		std::cout << "names[counter]: " << names[counter] << std::endl;
-		std::cout << "passwords[counter]: " << passwords[counter] << std::endl;
+		//if the username provided matches on on file then check password, if it doesn't then dont check the password
 		if (username == names[counter])
 		{
+			//if the password provided mathces the password for the username on file then change the flag and break the loop
 			if (hashedPassword == passwords[counter])
 			{
 				authenticate = true;
@@ -139,5 +145,6 @@ bool checkLogInFile(string username, string hashedPassword){
 		counter++;
 	}
 
+	//returns true if log in was successfull and false if not
 	return authenticate;
 }
