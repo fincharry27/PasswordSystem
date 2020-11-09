@@ -58,19 +58,22 @@ int main() {
 // This function was created with reference to this stack overflow page https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c
 string hashFunction(const string password)
 {
+	//setting up SHA256 encryption
 	unsigned char hash[SHA256_DIGEST_LENGTH];
 	SHA256_CTX sha256;
 	SHA256_Init(&sha256);
 	SHA256_Update(&sha256, password.c_str(), password.size());
 	SHA256_Final(hash, &sha256);
-
+	// Output string for the hashed password
 	string outPass = "";
+	//for loop which loops through the password and encrypts it using SHA256 appending the encrpyted password to the outPass variable
 	for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
 	{
 		stringstream ss;
-    	ss << hex << setw(2) << setfill('0') << (int) hash[i];
+    		ss << hex << setw(2) << setfill('0') << (int) hash[i];
 		outPass += ss.str();
 	}
+	//returns hashed password
 	return outPass;
 }
 
