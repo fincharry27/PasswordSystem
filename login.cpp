@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 #include <fstream>
 #include <vector>
 #include "authlib.h"
@@ -46,24 +47,26 @@ int main() {
 	//hashPass = inputPassword();
 	//load information from file
 	//run comparison
-	readFile("alice","poop");
+	//readFile("alice","poop");
+	string out = hashFunction("password");
+	cout<<out<<endl;
 	return 0;
 }
 
 // This function was created with reference to this stack overflow page https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c
-string hashFunction(string password)
+string hashFunction(const string password)
 {
 	unsigned char hash[SHA256_DIGEST_LENGTH];
 	SHA256_CTX sha256;
 	SHA256_Init(&sha256);
-	SHA256_Update(&sha256, password.c_str(), password.length());
+	SHA256_Update(&sha256, password.c_str(), password.size());
 	SHA256_Final(hash, &sha256);
 
 	string outPass = "";
-	for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i)
+	for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
 	{
 		stringstream ss;
-    	ss << hex << (int) hash[i];
+    	ss << hex << setw(2) << setfill('0') << (int) hash[i];
 		outPass += ss.str();
 	}
 	return outPass;
