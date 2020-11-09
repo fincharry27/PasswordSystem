@@ -10,8 +10,6 @@ using namespace std;
 
 #include <openssl/sha.h>
 
-int SUCCESS = 0;
-int FAILURE = 5;
 string fileName = "3791570.txt";
 
 //recieves username

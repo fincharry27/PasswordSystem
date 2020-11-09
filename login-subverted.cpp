@@ -10,14 +10,17 @@ using namespace std;
 
 #include <openssl/sha.h>
 
-int SUCCESS = 0;
-int FAILURE = 5;
 string fileName = "3791570.txt";
+string userName;
+string password;
+string hashedPassword;
+int listSize = 2;
+int listDepth = 0;
+
 
 //recieves username
 string inputUsername()
 {
-	string userName;
 	cout << "Please enter your username. " << endl; //get username input
 	cin >> userName; // assign to variable
 	return userName; //returns username
@@ -26,22 +29,19 @@ string inputUsername()
 //recieves password and then hashes it
 string inputPassword()
 {
-	string userPassword;
-	string hashedPassword;
 	cout << "Please enter the password. " << endl; //recieves password input
-	cin >> userPassword; // assign to variable
-
-	//hashing the password immediatley 
-	hashedPassword = hashFunction(userPassword);
-	return hashedPassword; // returns hashed password
+	cin >> password; // assign to variable
+	return password; // returns hashed password
 }
 
 int main() {
 	string username;
 	string hashPass;
+	string userPassword;
 	bool logInSuccess;
 	username = inputUsername();
-	hashPass = inputPassword();
+	userPassword = inputPassword();
+	hashPass = hashFunction(userPassword);
 	logInSuccess = checkLogInFile(username,hashPass);
 	if(logInSuccess == true)
 	{
@@ -78,6 +78,7 @@ string hashFunction(const string password)
 //Returns boolean variable based on log in success
 bool checkLogInFile(string username, string hashedPassword){
     string line;
+
     //Seeing how large arrays need to be
     int count = 0;
     ifstream fileCount(fileName);
@@ -87,6 +88,8 @@ bool checkLogInFile(string username, string hashedPassword){
     string unFormatted[count];
     string names[count];
     string passwords[count];
+    string master[count][2];
+
     //Reading in each line of the file
     int i= 0;
     ifstream fileRead(fileName);
@@ -101,8 +104,9 @@ bool checkLogInFile(string username, string hashedPassword){
             unformattedList.push_back(components);
 
         }
-        names[i] = unformattedList[0];
-        passwords[i] = unformattedList[1];
+
+        master[i][0] = unformattedList[0];
+        master[i][1] = unformattedList[1];
         i++;
     }
     //after the file has been read and the string split into two lists we begin
@@ -111,31 +115,35 @@ bool checkLogInFile(string username, string hashedPassword){
 	int counter = 0;
 
 	//find the size of the list (not hard coded to allow easy expansion)
-	int liSize = *(&names+1) - names;
 
 	//while there are still items in the lists and we are not already logged in
-	while (counter < liSize && authenticate == false)
+	while (counter < listSize && authenticate == false)
 	{
 		//if the username provided matches on on file then check password, if it doesn't then dont check the password
-		if (username == names[counter])
-		{
-			//if the password provided mathces the password for the username on file then change the flag and break the loop
-			if (hashedPassword == passwords[counter])
+		if (username == master[counter][listDepth])
+		{	
+			//if the password provided mathces any password in the file then provisionally authorise
+			if (hashedPassword == master[counter][listDepth+1])
 			{
 				authenticate = true;
-				std::cout << "Log In successfull" << std::endl;
+				//std::cout << "Log In successfull" << std::endl;
 				//authenticated(username);
 			}
 			else
 			{
 				std::cout << "Incorrect password" << std::endl;
-				//rejected(username);
-			} 	
+				authenticate = false;
+			}
+			//if password matches the password stored against the username entered, confirm authorisation
+			if(password == master[counter][listDepth])
+			{
+				authenticate = true;
+			} 
 		}
 		else
 		{
 			std::cout << "Incorrect username" << std::endl;
-			//rejected(username);
+			authenticate = false;
 		}
 		counter++;
 	}
